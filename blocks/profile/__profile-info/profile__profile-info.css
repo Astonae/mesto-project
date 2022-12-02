@@ -1,0 +1,10 @@
+.profile__profile-info {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  grid-template-rows: repeat(2, min-content);
+  padding-left: 30px;
+  grid-template-areas:
+    "profile__title profile__button-little profile__button-big"
+    "profile__subtile profile__button-little profile__button-big";
+}

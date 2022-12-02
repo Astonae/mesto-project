@@ -1,0 +1,8 @@
+.card__place {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-between;
+  padding: 25px 15px 31px 21px;
+}
