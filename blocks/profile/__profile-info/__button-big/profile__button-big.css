@@ -1,0 +1,5 @@
+.profile__button-big {
+  max-width: 150px;
+  padding: 35px 0 35px 244px;
+  grid-area: profile__button-big;
+}
