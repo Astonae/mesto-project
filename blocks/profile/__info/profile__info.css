@@ -1,12 +1,18 @@
 .profile__info {
   max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, max-content);
+  grid-template-columns: fit-content(100%);
   grid-template-rows: repeat(2, min-content);
   padding-left: 30px;
   grid-template-areas:
-    "profile__title profile__button-little"
+    "profile__title profile__button-edit"
     "profile__subtitle profile__subtitle";
+}
+
+@media screen and (max-width: 525px) {
+  .profile__info {
+    padding: 0;
+  }
 }
 
 @media screen and (max-width: 320px) {

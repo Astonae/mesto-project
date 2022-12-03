@@ -1,4 +1,4 @@
-.profile__button-little {
+.profile__button-edit {
   border: 1px solid #fff;
   background: transparent;
   width: 24px;
@@ -10,16 +10,16 @@
   background-position: center;
   box-sizing: border-box;
   margin: 37px 18px 0 20px;
-  grid-area: profile__button-little;
+  grid-area: profile__button-edit;
 }
 
-.profile__button-little:hover {
+.profile__button-edit:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
-  .profile__button-little {
+  .profile__button-edit {
     width: 22px;
     height: 22px;
     margin: 34px 18px 0 18px;
@@ -27,7 +27,7 @@
 }
 
 @media screen and (max-width: 525px) {
-  .profile__button-little {
+  .profile__button-edit {
     width: 20px;
     height: 20px;
     background-size: 7.5px 7.5px;
@@ -36,10 +36,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .profile__button-little {
-    width: 20px;
-    height: 20px;
-    background-size: 7.5px 7.5px;
+  .profile__button-edit {
     margin: 32px 0 0 10px;
   }
 }

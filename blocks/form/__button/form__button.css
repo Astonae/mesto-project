@@ -1,4 +1,4 @@
-.form__buttom {
+.form__button {
   min-width: 358px;
   max-height: 50px;
   background-color: #000;
@@ -15,16 +15,16 @@
   padding: 14px 124px 18px 125px;
   border: 0;
   border-radius: 2px;
-  margin-top: 19px;
+  margin-top: 48px;
 }
 
-.form__buttom:hover {
+.form__button:hover {
   opacity: 0.8;
   cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
-  .form__buttom {
+  .form__button {
     min-width: 238px;
     max-height: 46px;
     font-size: 14px;

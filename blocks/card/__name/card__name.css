@@ -1,21 +1,25 @@
-.card__country {
+.card__name {
   color: #000;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
   margin: 0;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 850px) {
-  .card__country {
+  .card__name {
     font-size: 20px;
     line-height: 25px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .card__country {
+  .card__name {
     font-size: 24px;
     line-height: 29px;
   }

@@ -1,5 +1,5 @@
 Автор: Шашкин Антон, Спринт 2 Яндекс Практикум
-[Готовый проект](https://astonae.github.io/russian-travel)
+[Готовый проект](https://astonae.github.io/mesto-project/)
 
 Технологии: HTML, CSS, Grid, Flex, Формы, Адаптивная вёрстка и медиазапросы.
 
