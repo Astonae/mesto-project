@@ -36,3 +36,5 @@
 @import url(../blocks/form/__about/form__about.css);
 @import url(../blocks/form/__button/form__button.css);
 @import url(../blocks/form/__text/form__text.css);
+
+@import url(../blocks/modal/modal.css);
