@@ -27,7 +27,7 @@
         </div>
       </div>
       <button type="button" class="profile__button-add"></button>
-    </section>
+    </section>  <!--
     <section class="cards">
       <article class="card">
         <img class="card__image" src="./images/karachaevsk.jpg" alt="Храм в Карачаевске">
@@ -72,23 +72,58 @@
         </div>
       </article>
     </section>
+    <section>
+      <article class="newcards">
+      </article>
+    </section>-->
+    <section class="cards"></section>
+    <template id="card-template">
+      <article class="card">
+        <button type="button-card" class="card__delete"></button>
+        <img class="card__image" src="" alt="">
+        <div class="card__place">
+          <h3 class="card__name"></h3>
+          <button type="button" class="card__like" id="card-like"></button>
+        </div>
+      </article>
+    </template>
   </main>
   <footer class="footer">
     <p class="footer__project">&copy; 2022 Mesto Russia</p>
   </footer>
-  <div class="popup popup_opened" id="popup">
+  <div class="popup" id="popup-profile">
     <div class="popup__container">
       <button type="button" class="popup__closed-button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="form" name="form__profile">
         <fieldset class="form__about">
-          <input class="form__text" type="text" name="name" placeholder="Ваше имя" required>
-          <input class="form__text" type="text" name="profession" placeholder="О себе" required>
+          <input class="form__text" type="text" id="name" name="name" value="Жак-Ив Кусто" placeholder="Ваше имя" required>
+          <input class="form__text" type="text" id="about" name="profession" value="Исследователь океана" placeholder="О себе" required>
           <button type="submit" class="form__button">Сохранить</button>
         </fieldset>
       </form>
     </div>
   </div>
+  <div class="popup" id="popup-picture">
+    <div class="popup__container">
+      <button type="button" class="popup__closed-button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="form" name="form__profile">
+        <fieldset class="form__about">
+          <input class="form__text" type="text" id="title" name="picture" placeholder="Название" required>
+          <input class="form__text" type="text" id="link" name="link" placeholder="Ссылка на картинку" required>
+          <button type="submit" class="form__button">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <div class="popup" id="popup-img">
+    <div class="popup__container-image">
+      <button type="button" class="popup__closed-button"></button>
+      <img class="popup__image" src="" alt="">
+      <h2 class="popup__title-image"></h2>
+    </div>
+  </div>
+  <script src="./newcards.js"></script>
+  <script src="./script.js"></script>
 </body>
-
-</html>
