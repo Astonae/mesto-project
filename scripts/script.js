@@ -7,15 +7,15 @@ const popupProfileCreateButton = popupProfile.querySelector('.form__button');
 const popupPicture = document.querySelector('#popup-picture');
 const popupPictureButton = popupPicture.querySelector('.popup__closed-button');
 const popupPictureCreateButton = popupPicture.querySelector('.form__button');
-const popupClose = document.querySelectorAll('.popup__closed-button');
+const popupCloses = document.querySelectorAll('.popup__closed-button');
 const popupImg = document.querySelector('#popup-img');
 const popupImgButton = popupImg.querySelector('.popup__closed-button');
 
 // Поиск редактирование форм
-let nameProfile = document.getElementById('name');
-let aboutProfile = document.getElementById('about');
-let profileInfo = document.querySelector('.profile__info');
-const formCardsProfile = popupProfile.querySelector('.form');
+const nameProfile = document.getElementById('name');
+const aboutProfile = document.getElementById('about');
+const profileInfo = document.querySelector('.profile__info');
+const formCardsProfile = document.forms['form__profile'];
 const formCardsAdd = popupPicture.querySelector('.form');
 const nameInput = popupPicture.querySelector('#title');
 const linkInput = popupPicture.querySelector('#link');
@@ -27,7 +27,7 @@ const blockCards = document.querySelector('.cards');
 
 /* ------------------------------------------------------- */
 
-// 1. Открытие и закрытие попапа
+// Открытие и закрытие попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -43,7 +43,7 @@ buttonPicture.addEventListener('click', function () {
   openPopup(popupPicture);
 });
 
-popupClose.forEach(function (button) {
+popupCloses.forEach(function (button) {
   const popup = button.closest('.popup');
   button.addEventListener('click', function () {
     closePopup(popup);
@@ -54,7 +54,7 @@ popupClose.forEach(function (button) {
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function handleFormSubmit(evt) {
+function handleFormSubmitProfile(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
                                                 // Так мы можем определить свою логику отправки.
                                                 // О том, как это делать, расскажем позже.
@@ -62,16 +62,17 @@ function handleFormSubmit(evt) {
     // Получите значение полей jobInput и nameInput из свойства value
     // Выберите элементы, куда должны быть вставлены значения полей
 	// Вставьте новые значения с помощью textContent
-	profileInfo.firstElementChild.textContent = nameProfile.value; // Выбираем первый элемент контейнера .profile__info, меняем  текст
-	profileInfo.lastElementChild.textContent = aboutProfile.value; // Выбираем последний элемент контейнера .profile__info, меняем  текст
+	profileInfo.firstElementChild.textContent = nameProfile.value; // Выбираем первый элемент контейнера .profile__info, меняем текст
+	profileInfo.lastElementChild.textContent = aboutProfile.value; // Выбираем последний элемент контейнера .profile__info, меняем текст
+
+  popupProfileCreateButton.addEventListener('click', function () { // Закрываем попап при клике на сохранить
+    closePopup(popupProfile);
+  });
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-  formCardsProfile.addEventListener('submit', handleFormSubmit);
-	popupProfileCreateButton.addEventListener('click', function () { // Закрываем попап при клике на сохранить
-    closePopup(popupProfile);
-});
+  formCardsProfile.addEventListener('submit', handleFormSubmitProfile);
 
 /* ------------------------------------------------------- */
 
@@ -80,16 +81,16 @@ function createElement(link, name) {
   const cardTemplate = document.querySelector('#card-template').content; // Шаблон карточки
   const cardClone = cardTemplate.querySelector('.card').cloneNode(true); // Клонирование карточки
   const cardDelete = cardClone.querySelector('.card__delete'); // Удаляем карточку
-  cardClone.querySelector('.card__image').src = link;
-  cardClone.querySelector('.card__image').alt = name;
+  const cardImage = cardClone.querySelector('.card__image');
+  cardImage.src = link;
+  cardImage.alt = name;
   cardClone.querySelector('.card__place');
   cardClone.querySelector('.card__name').textContent = name;
   cardClone.querySelector('.card__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like_active');
   });
-  cardClone.querySelector('.card__image').addEventListener('click', function (evt) {
-    newPopupImage(link, name)
-    evt.target.classList.toggle('.card__image');
+  cardImage.addEventListener('click', function (evt) {
+    openImagePopup(link, name)
   });
   cardDelete.addEventListener('click', () => {
     cardClone.remove();
@@ -107,26 +108,22 @@ buttonPicture.addEventListener('click', () => {
   openPopup(popupPicture);
 });
 
-popupPictureButton.addEventListener('click', () => {
-  closePopup(popupPicture);
-});
-
-popupPictureCreateButton.addEventListener('click', () => {
-  closePopup(popupPicture);
-});
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function submitCardsForm(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   blockCards.prepend(createElement(linkInput.value, nameInput.value));
+  popupPictureCreateButton.addEventListener('click', function () { // Закрываем попап при клике на сохранить
+    closePopup(popupPicture);
+  });
+  linkInput.value = '';
+  nameInput.value = '';
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 formCardsAdd.addEventListener('submit', submitCardsForm);
 
-function newPopupImage(link, name) {
+function openImagePopup(link, name) {
   openPopup(popupImg);
   popupImage.src = link;
   popupImage.alt = link;
