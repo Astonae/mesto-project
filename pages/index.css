@@ -40,6 +40,11 @@
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__about/form__about.css);
 @import url(../blocks/form/__button/form__button.css);
+@import url(../blocks/form/__button/form__button_inactive.css);
 @import url(../blocks/form/__text/form__text.css);
+@import url(../blocks/form/__input-error/form__input-error_active.css);
+@import url(../blocks/form/__input/form__input_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__user-name/form__user-name.css);
 
 @import url(../blocks/modal/modal.css);

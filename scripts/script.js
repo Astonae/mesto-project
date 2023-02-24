@@ -12,6 +12,10 @@ const popupImg = document.querySelector('#popup-img');
 const popupImgButton = popupImg.querySelector('.popup__closed-button');
 
 // Поиск редактирование форм
+
+
+
+
 const nameProfile = document.getElementById('name');
 const aboutProfile = document.getElementById('about');
 const profileInfo = document.querySelector('.profile__info');
@@ -33,7 +37,11 @@ function openPopup(popup) {
 }
 
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+    popup.classList.remove('popup_opened');
+  }
+
+function closePopupImg(popup) {
+  popup.classList.remove('popup__image');
 }
 
 buttonEditProfile.addEventListener('click', function () {
@@ -87,7 +95,7 @@ function createElement(link, name) {
     evt.target.classList.toggle('card__like_active');
   });
   cardImage.addEventListener('click', function (evt) {
-    openImagePopup(link, name)
+    openImagePopup(link, name);
   });
   cardDelete.addEventListener('click', () => {
     cardClone.remove();
@@ -119,9 +127,100 @@ function submitCardsForm(evt) {
 // он будет следить за событием “submit” - «отправка»
 formCardsAdd.addEventListener('submit', submitCardsForm);
 
+
 function openImagePopup(link, name) {
   openPopup(popupImg);
   popupImage.src = link;
-  popupImage.alt = link;
+  popupImage.alt = name;
   popupTitleImage.textContent = name;
 }
+
+// Закрываем попап профиля клавишей (по умолчанию ESC):
+buttonEditProfile.addEventListener('keydown', function () {
+  closePopup(popupProfile);
+});
+
+// Закрываем попап добавление карточки клавишей (по умолчанию ESC):
+buttonPicture.addEventListener('keydown', function () {
+  closePopup(popupPicture);
+});
+
+// Закрываем попап картинки клавишей (по умолчанию ESC):
+//cardImage.addEventListener('keydown', function () {
+//  closePopup(popupImg);
+//});
+
+//------Работа с попап - инпут------
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('form__input_type_error');
+  errorElement.classList.remove('form__input-error_active');
+  errorElement.textContent = '';
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = (formElement, inputElement) => {
+  if (inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+  } else {
+    inputElement.setCustomValidity("");
+  }
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.form__text'));
+  const buttonElement = formElement.querySelector('.form__button');
+  toggleButtonState(inputList, buttonElement);
+    inputList.forEach((inputElement) => {
+    // каждому полю добавим обработчик события input
+    inputElement.addEventListener('input', () => {
+      // Внутри колбэка вызовем isValid,
+      // передав ей форму и проверяемый элемент
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+};
+
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.form__about'));
+  formList.forEach((formElement) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
+    setEventListeners(formElement);
+});
+}
+enableValidation();
+
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
+    buttonElement.classList.add('form__button_inactive');
+  } else {
+        // иначе сделай кнопку активной
+    buttonElement.disabled = false;
+    buttonElement.classList.remove('form__button_inactive');
+  };
+};
