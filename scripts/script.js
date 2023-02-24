@@ -196,18 +196,6 @@ const setEventListeners = (formElement) => {
   });
 };
 
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.form__about'));
-  formList.forEach((formElement) => {
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-  });
-    setEventListeners(formElement);
-});
-}
-enableValidation();
-
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -224,3 +212,14 @@ const toggleButtonState = (inputList, buttonElement) => {
     buttonElement.classList.remove('form__button_inactive');
   };
 };
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.form'));
+  formList.forEach((formElement) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
+    setEventListeners(formElement);
+});
+}
+enableValidation();

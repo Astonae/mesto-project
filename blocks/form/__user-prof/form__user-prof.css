@@ -1,6 +1,6 @@
-.form__user-name {
+.form__user-prof {
   width: 100%;
-  margin: 50px 0 30px 0;
+  margin: 0;
   border: 0;
   padding: 0 0 9px 0;
   border-bottom: 1px solid rgb(0, 0, 0, 0.2);
@@ -12,7 +12,11 @@
 }
 
 @media screen and (max-width: 767px) {
-  .form__user-name {
+  .form__user-prof {
     margin-top: 0;
   }
+}
+
+.form__user-prof:invalid {
+  margin-bottom: 5px;
 }
