@@ -13,9 +13,6 @@ const popupImgButton = popupImg.querySelector('.popup__closed-button');
 
 // Поиск редактирование форм
 
-
-
-
 const nameProfile = document.getElementById('name');
 const aboutProfile = document.getElementById('about');
 const profileInfo = document.querySelector('.profile__info');
@@ -55,6 +52,23 @@ closeButtons.forEach(function (button) {
   const popup = button.closest('.popup');
   button.addEventListener('click', function () {
     closePopup(popup);
+ });
+});
+
+// Закрываем попап кликом по оверлэй
+document.addEventListener('click', function (evt) {
+  if(evt.target.classList.remove('popup_opened')) {
+    closePopup(popup);
+  }
+});
+
+// Закрываем попап клавишей ESC:
+closeButtons.forEach(function (button) {
+  const popup = button.closest('.popup');
+  document.addEventListener('keydown', function(evt) {
+    if(evt.keyCode == 27) {
+      closePopup(popup);
+    };
   });
 });
 
@@ -134,21 +148,6 @@ function openImagePopup(link, name) {
   popupImage.alt = name;
   popupTitleImage.textContent = name;
 }
-
-// Закрываем попап профиля клавишей (по умолчанию ESC):
-buttonEditProfile.addEventListener('keydown', function () {
-  closePopup(popupProfile);
-});
-
-// Закрываем попап добавление карточки клавишей (по умолчанию ESC):
-buttonPicture.addEventListener('keydown', function () {
-  closePopup(popupPicture);
-});
-
-// Закрываем попап картинки клавишей (по умолчанию ESC):
-//cardImage.addEventListener('keydown', function () {
-//  closePopup(popupImg);
-//});
 
 //------Работа с попап - инпут------
 // Функция, которая добавляет класс с ошибкой
